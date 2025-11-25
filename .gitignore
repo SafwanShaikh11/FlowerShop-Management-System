@@ -1,0 +1,7 @@
+.idea/
+FlowerShop/.idea/
+*.iml
+*.xml
+out/
+target/
+*.pdf
