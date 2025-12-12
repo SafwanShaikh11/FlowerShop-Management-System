@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+/**This class is a representation of what a catalog in my Flower Shop would look like
+ * it's using the Arraylist for better traversal if I use any Iterator
+ * **/
 
 public class Catalog {
     private ArrayList<Arrangement> arrangements;
