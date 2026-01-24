@@ -1,5 +1,8 @@
 import Interfaces.Item;
-
+/**
+ * this class represents the actual Flower 
+ * we'll be using 
+ */
 public class Flower implements Item {
     private String name;
 

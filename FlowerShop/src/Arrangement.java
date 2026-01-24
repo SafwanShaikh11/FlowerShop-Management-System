@@ -7,6 +7,11 @@ public class Arrangement implements Priceable {
     private Vase vase;
     private double price;
 
+/**
+ * This class handles the arrangements of the flowers 
+ * get Vases names 
+ * retrieves price
+ */
     public Arrangement(Flower[] flowers, Vase vase, double price) {
         this.flowers = flowers;
         this.vase = vase;
@@ -22,6 +27,7 @@ public class Arrangement implements Priceable {
 
     /**
      * Get all flower names in arrangement.
+     * returns the names as an arraylist return type
      */
     public ArrayList<String> getFlowerNames() {
         ArrayList<String> names = new ArrayList<>();
