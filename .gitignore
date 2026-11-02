@@ -5,3 +5,9 @@ FlowerShop/.idea/
 out/
 target/
 *.pdf
+# Local dependencies
+FlowerShop/lib/
+
+# Generated compilation output
+FlowerShop/out-ci/
+*.class
