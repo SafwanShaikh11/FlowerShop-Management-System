@@ -1,0 +1,54 @@
+
+name: FlowerShop CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Download Brock Packages
+        run: |
+          curl -fL https://www.cosc.brocku.ca/files/downloads/java/Brock_Packages.zip \
+            -o "$RUNNER_TEMP/Brock_packages.zip"
+
+          mkdir -p "$RUNNER_TEMP/brock-packages"
+          unzip -q "$RUNNER_TEMP/Brock_packages.zip" \
+            -d "$RUNNER_TEMP/brock-packages"
+
+      - name: Locate BasicIO library
+        run: |
+          BASICIO_JAR=$(find "$RUNNER_TEMP/brock-packages" \
+            -iname 'BasicIO.jar' -print -quit)
+
+          if [ -z "$BASICIO_JAR" ]; then
+            echo "BasicIO.jar was not found"
+            exit 1
+          fi
+
+          echo "BASICIO_JAR=$BASICIO_JAR" >> "$GITHUB_ENV"
+
+      - name: Compile FlowerShop
+        run: |
+          mkdir -p build/classes
+
+          mapfile -d '' SOURCES < <(
+            find FlowerShop/src -type f -name '*.java' -print0
+          )
+
+          javac -cp "$BASICIO_JAR" \
+            -d build/classes "${SOURCES[@]}"
